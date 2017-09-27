@@ -1,0 +1,64 @@
+//main.cpp
+
+#include <string>
+#include <iostream>
+#include <cstdlib>
+
+#include "hashtable.h"
+
+using namespace std;
+
+//Menu is pretty self explanatory...
+char menu(){
+	char userChoice;
+
+	cout<< "\nMENU" << endl;
+	cout << "0. Exit.\n";
+	cout << "1. Add name.\n";
+	cout << "2. Find a name.\n";
+	cout << "3. Remove a name.\n";
+
+
+	cin >> userChoice; 
+	return userChoice;
+}
+
+
+int main(int argv, char** argc){
+	
+	int bucket;
+
+	struct hash;
+	hash hashOb;
+	string name;
+
+	bucket = hashOb.Hash(argc);
+
+	do {
+		
+		choice = menu();
+
+		switch(choice) {
+			case '1':cout << "Please enter a name. ";
+					cin >> name; 
+					
+					addItem(name);
+					break;
+
+			case '2': 
+
+					
+					break; 
+
+			case '3': 	cout << "Please enter the name of the person you want to kill: ";
+					cin >> name;
+					removeItem(name);
+					break;		
+			
+			default: cout<< "System exit.\n";
+		}
+
+	} while (choice != '0');
+
+	return 0;
+}

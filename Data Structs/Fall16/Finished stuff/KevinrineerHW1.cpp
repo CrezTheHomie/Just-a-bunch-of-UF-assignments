@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+
+int main(){
+	int N;	std::cin >> N; //Get size input
+
+	//Space for ease of reading
+	std::cout << "\n";
+
+	//Create input array
+	int foo[N];
+	for(int i = 0; i < N; i++){
+		std::cin >> foo[i];
+	}
+	
+	//Space for ease of reading
+	std::cout << "\n";
+
+	//Insertion sort stuff
+	int j,v;
+	for(int i = 0; i < N; i++){
+		v = foo[i]; j=i;
+
+		//while previous is larger than current and while staying in bounds of array
+		while(foo[j-1] > v && j > 0){
+			foo[j] = foo[j-1]; //set current to previous (first step to swap)
+			j--;	
+		}
+		foo[j] = v; //set the intially compared smaller # to larger # (last step of swap)	
+	}
+	
+	for(int i = 0; i < N; i++){
+		std::cout << foo[i] << "\n";
+	}
+}

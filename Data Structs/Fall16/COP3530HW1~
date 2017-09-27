@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+
+int main(){
+	int N;	cin >> N; 
+	int array[N];
+	int i = 0;
+	int temp;
+	while(N > 1){
+	std::cin >> temp;
+	array[i] = temp;
+	i++;	N--;
+	cout << array << "\n";
+	}
+}

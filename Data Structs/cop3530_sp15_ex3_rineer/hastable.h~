@@ -1,0 +1,28 @@
+//hashtable.h
+
+#include <string>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+class hash{
+public:
+	static const int tableSize = 20;
+
+	struct item{
+		string name;
+		item* next;
+	};
+
+	item* hashtable[tableSize];
+
+	hash();
+	int Hash(string key);
+	void addItem(string name);
+	int NumberOfItemsInBucket(int bucket);
+	void printTable();
+	void printItemsInBucket(int bucket);
+	void findName(string name);
+	void removeItem(string name);
+};

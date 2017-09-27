@@ -1,0 +1,12 @@
+DEBUG = -g
+CFLAGS = -Wall -c -o $(DEBUG)
+
+hash-table: hashtable.o main.o
+	    $(CFLAGS) hashtable.o main.o hash-table
+hashtable.h: 
+
+hashtable.o: hashtable.cpp hashtable.h
+	       $(CFLAGS) hashtable.cpp
+
+main.o: main.cpp
+	  $(CFLAGS) main.cpp

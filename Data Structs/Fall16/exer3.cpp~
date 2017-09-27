@@ -1,0 +1,99 @@
+#include <iostream>
+#include <stdio.h>
+#include <cstdlib>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+class btree{
+
+struct node{
+	int key;
+	node* left;
+	node* right;
+};
+
+public:
+	btree(){
+		root = NULL;
+		cur = NULL;
+	}
+private:
+	node* root;
+};
+/*
+void intitializeTree(int val){
+	Node *n = new Node();   // create new Node
+	n->key = val;             // set value       
+	//n->next = NULL;         // make the node point to the next node.
+
+	if(root == NULL){
+		root = n;
+		}
+	else if(head->left == NULL && head !=NULL){
+		head -> left = n;
+		cur = n;
+		}
+	else{
+		cur -> next = n;
+		cur = n;
+		}
+	}
+
+}*/
+
+//converts a string of ints to its integer value
+int strToInt(string str){
+
+	int num = 0;
+	int placeholder;
+
+	for(int i = 0; i < str.size(); i++) {
+		num = num * 10;
+		num += str.at(i) - '0';
+	}
+
+	return num;
+}
+
+int main() {
+	string input;
+	int n;
+	int m;
+	int i = 0;
+	int size;
+	btree Tree; 
+
+	stringstream stream;
+	getline(cin,input);
+	n = strToInt(input); //get the number of nodes for the tree
+	size = (n*3); //multiply it by 3 so array can store data and left and right assignments.
+	int tree[size]; //array for stored input
+	while(n > 0){
+		getline(cin,input);
+		stream.str(input);
+		m = 0;
+		while(stream >> m){
+			cout << "m: " << m << " was placed in array at: " << i << "\n";
+			tree[i] = m;
+			i++;
+		}
+		stream.clear();//clear any bits set in the stringstream
+		stream.str(std::string()); //resets the stream variable
+		n--;
+	}
+	Node *n = new Node();   // create new Node
+	n->key = tree[i-2];             // set value     
+	tree[i-2] = n&;
+	cout << tree[i-2] << "\n";
+	/* Print the array
+	for(int j = 0; j < size; j++){
+		cout <<  tree[j] << " ";
+	}
+	cout << "\n";*/
+
+	
+
+	return 0;
+}

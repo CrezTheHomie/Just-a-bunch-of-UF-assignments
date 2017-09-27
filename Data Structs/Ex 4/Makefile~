@@ -1,0 +1,9 @@
+CC = g++
+DEBUG = -g
+CFLAGS = -Wall -c -o $(DEBUG)
+LFLAGS = -Wall $(DEBUG)
+
+Search: exer-2.cpp
+
+exer-2: exer-2.o 
+	$(CFLAGS) exer-2.o

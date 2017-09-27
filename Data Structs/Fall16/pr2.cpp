@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <queue>
+
+using namespace std;
+
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child */
+struct node
+{
+	int data;
+	node* left;
+	node* right;
+	node* next;
+};
+ 
+/* Helper function that allocates a new node with the
+   given data and NULL left and right pointers. */
+struct node* newNode(int data)
+{
+	node* node = (struct node*)
+	node->data = data;
+	node->left = NULL;
+	node->right = NULL;
+ 
+	return node;
+}
+
+void printLevelOrder(node *root){
+	// Base Case
+	if (root == NULL){return;}
+ 
+	// Create an empty queue for level order tarversal
+	queue<node *> q;
+ 
+	// Enqueue Root and initialize height
+	q.push(root);
+ 
+	while(q.empty() == false){
+		// Print front of queue and remove it from queue
+		node *node = q.front();
+		cout << node->data << " ";
+		q.pop();
+	 
+	       	//Put the left child in queue
+		if(node->left != NULL){
+			q.push(node->left);
+	 	}
+		//Put the right child in queue
+		if(node->right != NULL){
+			q.push(node->right);
+		}
+	}
+}
+ 
+//converts a string of ints to its integer value
+int strToInt(string str){
+
+	int num = 0;
+
+	for(int i = 0; i < str.size(); i++) {
+		num = num * 10; // move the number up a digit place
+		num += str.at(i) - '0'; // ASCII math to convert the char to a number
+	}
+
+	return num;
+}
+
+/* Driver program to test above functions*/
+int main()
+{
+	string input;
+	int size, j, k;
+	int i = 0;
+	
+	stringstream stream;
+	cin >> j; //get the number of nodes for the tree
+	size = (j*3); //multiply it by 3 so array can store data and left and right assignments.
+	int arr[size]; //array for stored input
+	while(j > 0){
+		getline(cin,input);
+		stream.str(input);
+		while(stream >> k){
+			//cout << "k: " << k << " was placed in array at: " << i << "\n";
+			arr[i] = k;
+			i++;
+		}
+		stream.clear();//clear any bits set in the stringstream
+		j--;
+	}
+
+	node *root = newNode(arr[0]);
+	node *cur = root;
+	node *n = root;
+
+	//cout << "for loop start \n" << "i/3 = " << i/3 << "\n";
+	//create a linked list
+	for(k = 1; k < i/3; k++){
+		if(root->next == NULL && root !=NULL){
+			n = newNode(arr[k*3]);
+			root->next = n;
+			cur = n;
+		}
+		else{
+			n = newNode(arr[k*3]);
+			cur -> next = n;
+			cur = n;
+		}
+	}
+	
+	//assign children to nodes
+	cur = root;
+	j = 0;
+	while(cur != NULL){
+		//assign left child
+		n = root;
+		k = arr[(j*3)+1];
+		//cout << "k = " << k << "\n";
+		if(k == 0-1){
+			//cout << "left pointer for node with " << cur->data << " assigned to null\n";
+			cur->left = NULL;
+		}
+		else{
+			while(n->data != arr[k*3] && n->next != NULL){
+				n = n->next;
+			}
+			//cout << "left pointer for node with " << cur->data << " assigned to " << n->data << "\n";
+			cur->left = n;
+		}
+		//assign right child
+		n = root;
+		k = arr[(j*3)+2];
+		//cout << "k = " << k << "\n";
+		if(k == 0-1){
+			//cout << "right pointer for node with " << cur->data << " assigned to null\n";
+			cur->right = NULL;
+		}
+		else{
+			n = root;
+			k = arr[(j*3)+2];
+			while(n->data != arr[k*3] && n->next != NULL){
+				n = n->next;
+			}
+			//cout << "right pointer for node with " << cur->data << " assigned to " << n->data << "\n";
+			cur->right = n;
+		}
+		//update next line
+		cur = cur->next;
+		j++;
+	}
+
+	printLevelOrder(root); cout << "\n";
+	return 0;
+}
